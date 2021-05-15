@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jie.blog.mapper.BlogMapper">
+    <update id="addView">
+        update vueblog.m_blog set view=view+#{count},created=created where id=#{id};
+    </update>
+
+
+    <select id="getBlog" resultMap="getBlogID">
+        select * from vueblog.m_blog where id=#{id};
+    </select>
+
+    <resultMap id="getBlogID" type="com.jie.blog.pojo.Blog">
+        <collection property="comments" column="id" ofType="com.jie.blog.pojo.Comment" select="getCommentByid"  />
+    </resultMap>
+
+    <select id="getCommentByid" resultMap="getUser">
+        select * from vueblog.m_comment where blog_id=#{id};
+    </select>
+
+    <resultMap id="getUser" type="com.jie.blog.pojo.Comment">
+        <collection property="user" column="user_id" ofType="com.jie.blog.pojo.User" select="getUser"/>
+    </resultMap>
+
+    <select id="getUser" resultType="com.jie.blog.pojo.User">
+        select * from vueblog.m_user where id=#{user_id}
+    </select>
+
+    <update id="addCom">
+        update vueblog.m_blog set m_blog.comment_count=comment_count+1,vueblog.m_blog.created=vueblog.m_blog.created where id=#{id};
+    </update>
+
+    <select id="getHot" resultType="com.jie.blog.pojo.Blog">
+        select id,title from vueblog.m_blog  order by vueblog.m_blog.view desc limit 0,8
+    </select>
+</mapper>

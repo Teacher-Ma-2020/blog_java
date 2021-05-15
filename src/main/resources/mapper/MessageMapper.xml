@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jie.blog.mapper.MessageMapper">
+
+    <select id="getAlls"  resultMap="MessageMap">
+        select m_message.id mid,m_message.content mcontext,m_message.user_id muid ,m_user.username,avatar,m_message.created created from vueblog.m_message,vueblog.m_user WHERE m_message.user_id=m_user.id order by m_message.created desc ;
+    </select>
+
+    <resultMap id="MessageMap" type="com.jie.blog.pojo.Message">
+        <result property="id" column="mid"/>
+        <result property="content" column="mcontext"/>
+        <result property="userId" column="muid"/>
+        <result property="userId" column="muid"/>
+        <result property="created" column="created"/>
+        <association property="user" javaType="com.jie.blog.pojo.User">
+            <result property="username" column="username"/>
+            <result property="avatar" column="avatar"/>
+        </association>
+    </resultMap>
+
+</mapper>
