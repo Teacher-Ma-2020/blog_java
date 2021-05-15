@@ -142,4 +142,9 @@ public class BlogController {
         List<Blog> list = blogService.list(new QueryWrapper<Blog>().eq("user_id",userid));
         return Result.success(list.size());
     }
+
+    @GetMapping("/hello")
+    public Result hello(){
+        return Result.success("hello");
+    }
 }
