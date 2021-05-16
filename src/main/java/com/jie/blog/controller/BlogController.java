@@ -145,6 +145,7 @@ public class BlogController {
 
     @GetMapping("/hello")
     public Result hello(){
+        System.out.println("hot-fix");
         return Result.success("hello");
     }
 }
