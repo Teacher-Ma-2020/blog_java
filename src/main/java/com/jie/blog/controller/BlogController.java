@@ -145,7 +145,7 @@ public class BlogController {
 
     @GetMapping("/hello")
     public Result hello(){
-        System.out.println("hot-fix");
+        System.out.println("master 冲突测试");
         return Result.success("hello");
     }
 }
