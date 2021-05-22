@@ -24,6 +24,10 @@ public class MessageController {
     }
 
 
+    @GetMapping("/deleteById")
+    public Result deleteByIdl(Long id){
+        return Result.success(messageService.removeById(id));
+    }
 
     @PostMapping("/addMessage")
     public Result addMessage(@RequestBody MessAgeDto messAgeDto){
