@@ -158,7 +158,7 @@ public class BlogController {
     public Result hello(){
         System.out.println("master 冲突测试");
         System.out.println("hot-冲突测试");
-        System.out.println("github 拉取测试");
+        System.out.println("github 拉取测试2");
         return Result.success("hello");
     }
 }
