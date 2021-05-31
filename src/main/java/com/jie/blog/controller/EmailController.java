@@ -27,7 +27,6 @@ public class EmailController {
      */
     @GetMapping("/get")
     public Result get(String email){
-        System.out.println(email);
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setSubject("验证码");
         long content = (long) ((Math.random() * 9 + 1) * 100000);

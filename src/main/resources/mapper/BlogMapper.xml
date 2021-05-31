@@ -29,6 +29,9 @@
     <update id="addCom">
         update vueblog.m_blog set m_blog.comment_count=comment_count+1,vueblog.m_blog.created=vueblog.m_blog.created where id=#{id};
     </update>
+    <delete id="deleteCom">
+        update vueblog.m_blog set m_blog.comment_count=comment_count-1,vueblog.m_blog.created=vueblog.m_blog.created where id=#{id};
+    </delete>
 
     <select id="getHot" resultType="com.jie.blog.pojo.Blog">
         select id,title from vueblog.m_blog  order by vueblog.m_blog.view desc limit 0,8

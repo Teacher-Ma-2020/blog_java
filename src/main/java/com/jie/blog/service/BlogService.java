@@ -11,4 +11,5 @@ public interface BlogService extends IService<Blog> {
     Blog getBlogById(Long id);
     int addCom(Long id);
     List<Blog> getHot();
+    int deleteCom(Long id);
 }

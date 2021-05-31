@@ -28,7 +28,6 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @NotNull(message = "昵称不为空")
     private String username;
 
     private String avatar;
@@ -41,7 +40,6 @@ public class User implements Serializable {
 
     private Integer status;
 
-//    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime created;
 
     private LocalDateTime lastLogin;

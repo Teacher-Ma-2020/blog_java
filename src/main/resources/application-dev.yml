@@ -1,10 +1,13 @@
 # DataSource Config
 spring:
+  redis:
+    password: ZCJzcj4068321
+    host: 121.43.55.23
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://121.43.55.23:3306/vueblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 123456
+    password: ZCJzcj4068321
     hikari:
 #      connection-timeout: 60000
       max-lifetime: 50000

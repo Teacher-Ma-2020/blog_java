@@ -14,4 +14,5 @@ public interface BlogMapper extends BaseMapper<Blog> {
     User getUser(Long id);
     int addCom(Long id);
     List<Blog> getHot();
+    int deleteCom(Long id);
 }

@@ -3,6 +3,6 @@
 <mapper namespace="com.jie.blog.mapper.UserMapper">
 
     <select id="getAll" resultType="com.jie.blog.pojo.User">
-        select username,avatar from vueblog.m_user order by last_login desc limit 0,12
+        select id,username,avatar from vueblog.m_user order by last_login desc limit 0,12
     </select>
 </mapper>

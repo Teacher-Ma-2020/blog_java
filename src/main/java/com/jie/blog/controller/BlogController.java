@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jie.blog.common.lang.Result;
+import com.jie.blog.mapper.BlogMapper;
 import com.jie.blog.pojo.Blog;
 import com.jie.blog.pojo.Blogs;
 import com.jie.blog.service.BlogService;
@@ -14,6 +15,7 @@ import com.jie.blog.service.UserService;
 import com.jie.blog.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,11 @@ public class BlogController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired
+    BlogMapper blogMapper;
 
     /**
      * 查询所有博客
@@ -83,6 +90,7 @@ public class BlogController {
     public Result list(@PathVariable(name ="id") Long id){
         Blog blog=blogService.getBlogById(id);
         Assert.notNull(blog,"该博客已被删除");
+        blog.setDynamicTags(blog.getTags().split(" "));
         blogService.addView(id,new Random().nextInt(3)+1);
         return Result.success(blog);
     }
@@ -118,6 +126,9 @@ public class BlogController {
             temp.setDescription(temp.getContent());
         }
         blogService.saveOrUpdate(temp);
+        Blog redis_blog = blogMapper.getBlog(temp.getId());
+        System.out.println(redis_blog);
+        redisTemplate.opsForValue().set("blog:getBlogById" + temp.getId(),redis_blog);
         return Result.success(null);
     }
 

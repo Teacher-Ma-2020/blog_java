@@ -10,5 +10,6 @@ class BlogApplicationTests {
 
     @Test
     public void a() throws IOException {
+        
     }
 }
