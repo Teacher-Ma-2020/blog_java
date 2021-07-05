@@ -31,6 +31,9 @@ public class MessageController {
 
     @PostMapping("/addMessage")
     public Result addMessage(@RequestBody MessAgeDto messAgeDto){
+        if (messAgeDto.getUser_id()==0){
+            throw new RuntimeException("请先登陆");
+        }
         Message message=new Message(messAgeDto.getUser_id(),messAgeDto.getContent());
         message.setCreated(LocalDateTime.now());
         boolean save = messageService.save(message);

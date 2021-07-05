@@ -10,7 +10,6 @@ import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.util.StringUtils;
 
@@ -31,7 +30,7 @@ public class JwtFilter extends AuthenticatingFilter {
         String jwt=request.getHeader("Authorization");
         //如果没有jwt
         if(StringUtils.isEmpty(jwt)){
-            return null;
+            throw new ExpiredCredentialsException("无权限");
         }
         return new JwtToken(jwt);
     }
@@ -41,6 +40,7 @@ public class JwtFilter extends AuthenticatingFilter {
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         HttpServletRequest request=(HttpServletRequest) servletRequest;
         String jwt=request.getHeader("Authorization");
+        System.out.println(jwt);
         //如果没有jwt
         if(StringUtils.isEmpty(jwt)){
             return true;
