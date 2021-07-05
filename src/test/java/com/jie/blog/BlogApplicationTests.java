@@ -10,6 +10,6 @@ class BlogApplicationTests {
 
     @Test
     public void a() throws IOException {
-        
+        System.println.out("test");
     }
 }
